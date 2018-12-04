@@ -31,6 +31,14 @@
                 document.body.insertBefore(this.canvas, document.body.childNodes[0]);
                 this.frameNo = 0;
                 this.interval = setInterval(updateGameArea, 20);
+                // implementa movimento com as setas
+                window.addEventListener('keydown', function (e) {
+                    myGameArea.keys = (myGameArea.keys || []);
+                    myGameArea.keys[e.keyCode] = (e.type == "keydown");
+                })
+                window.addEventListener('keyup', function (e) {
+                    myGameArea.keys[e.keyCode] = (e.type == "keydown");
+                })
             },
             clear: function () {
                 this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -39,7 +47,6 @@
                 clearInterval(this.interval);
             }
         }
-
         function component(width, height, color, x, y) {
             this.width = width;
             this.height = height;
@@ -72,7 +79,7 @@
                 return crash;
             }
         }
-
+        
         function updateGameArea() {
             var x, y;
             for (i = 0; i < myObstacles.length; i += 1) {
@@ -85,7 +92,7 @@
             myGameArea.frameNo += 1;
             if (myGameArea.frameNo == 1 || everyinterval(150)) {
                 x = myGameArea.canvas.width;
-                y = myGameArea.canvas.height - 200;
+                y = myGameArea.canvas.height - Math.ceil(Math.random() * 500);
                 myObstacles.push(new component(10, 200, "green", x, y));
             }
             for (i = 0; i < myObstacles.length; i += 1) {
@@ -120,14 +127,13 @@
         function clearmove() {
             myGamePiece.speedX = 0;
             myGamePiece.speedY = 0;
-            myGamePiece.spe
         }
     </script>
     <div style="text-align:center;width:480px;">
-        <button onmousedown="moveup()" onmouseup="clearmove()" ontouchstart="moveup()">CIMA</button><br><br>        
+        <button onmousedown="moveup()" onmouseup="clearmove()" ontouchstart="moveup()">CIMA</button><br><br>
         <button onclick="moveleft()" onmouseup="clearmove()" ontouchstart="moveleft()">ESQUERDA</button>
         <button onclick="moveright()" onmouseup="clearmove()" ontouchstart="moveright()">DIREITA</button><br><br>
-        <button onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">BAIXO</button><br><br><br><br><br><br>
+        <button onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">BAIXO</button>
     </div>
     <p>Utilize os botões usando o mouse para desviar dos obstáculos.</p>
     <p>Você pode utilizar as setas do teclado para controlar o Cubo!</p>
