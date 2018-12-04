@@ -82,6 +82,10 @@
 
         function updateGameArea() {
             var x, y;
+            if (myGameArea.keys && myGameArea.keys[37]) { myGamePiece.speedX = -1; }
+            if (myGameArea.keys && myGameArea.keys[39]) { myGamePiece.speedX = 1; }
+            if (myGameArea.keys && myGameArea.keys[38]) { myGamePiece.speedY = -1; }
+            if (myGameArea.keys && myGameArea.keys[40]) { myGamePiece.speedY = 1; }
             for (i = 0; i < myObstacles.length; i += 1) {
                 if (myGamePiece.crashWith(myObstacles[i])) {
                     myGameArea.stop();
@@ -136,6 +140,8 @@
         <button onmousedown="movedown()" onmouseup="clearmove()" ontouchstart="movedown()">BAIXO</button>
     </div>
     <p>Utilize os botões usando o mouse para desviar dos obstáculos.</p>
+    <p>Você pode utilizar as setas do teclado para controlar o Cubo, mas a difuldade irá aumentar!</p>
+    <p></p>
 
 </body>
 
