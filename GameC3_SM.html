@@ -132,7 +132,13 @@
             myGamePiece.speedX = 0;
             myGamePiece.speedY = 0;
         }
+
+        function restartGame() {
+            location.reload();
+        }
+
     </script>
+    <br><button onclick="restartGame()">REINICIAR</button>
     <div style="text-align:center;width:480px;">
         <button onmousedown="moveup()" onmouseup="clearmove()" ontouchstart="moveup()">CIMA</button><br><br>
         <button onclick="moveleft()" onmouseup="clearmove()" ontouchstart="moveleft()">ESQUERDA</button>
